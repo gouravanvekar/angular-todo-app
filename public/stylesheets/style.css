@@ -1,7 +1,8 @@
 .task-separator{
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .centered-text {
-    text-align:center
+    text-align: center;
 }

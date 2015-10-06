@@ -9,7 +9,7 @@ var tasks = [
     },
     {
         "taskId": 1,
-        "taskName": "",
+        "taskName": "Watch TV",
         "taskPriority": "",
         "taskDate": "05/26/2015",
         "taskStatus": "",
@@ -17,7 +17,7 @@ var tasks = [
     },
     {
         "taskId": 1,
-        "taskName": "",
+        "taskName": "Make dinner",
         "taskPriority": "",
         "taskDate": "9/05/2015",
         "taskStatus": "",

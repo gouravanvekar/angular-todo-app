@@ -7,11 +7,12 @@
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
     function config($stateProvider, $urlRouterProvider) {
-        //$urlRouterProvider.otherwise('/');
-        //$stateProvider
-        //    .state('home', {
-        //        url: "/",
-        //        templateUrl: ""
-        //    });
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+            .state('home', {
+                url: "/",
+                templateUrl: "scripts/landing/landing.html",
+                controller: 'TaskController as TaskCtrl'
+            });
     }
 })();

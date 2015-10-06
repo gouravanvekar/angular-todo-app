@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3" >
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Task Type
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="" placeholder="Enter new task" ng-model="newTask.taskName">
+                    <div class="input-group-btn">
+                        <div class="btn-group" dropdown>
+                            <button id="btn-append-to-body" type="button" class="btn btn-default" dropdown-toggle>
+                                Priority <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu drop-index" role="menu" aria-labelledby="btn-append-to-body" ng-model="newTask.taskPriority">
+                                <li role="menuitem"><a href="#">Low</a></li>
+                                <li role="menuitem"><a href="#">Medium</a></li>
+                                <li role="menuitem"><a href="#">High</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-default btn-primary" ng-click="addTask(newTask)">Add</button>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row task-separator"  ng-repeat="task in tasks" ng-mouseenter="task.buttons= true;" ng-mouseleave="task.buttons= false;">
+                    <div class="col-md-8 col-lg-8" ng-dblclick="startEditing(task);">
+                        <span ng-hide="task.editing">
+                            <h5>{{task.taskName}}</h5>
+                        </span>
+                        <form ng-submit="doneEditing(task)" ng-show="task.editing">
+                            <input type="text" class="form-control" ng-model="task.taskName" ng-blur="doneEditing(task)" ng-focus="task == editedTask">
+                        </form>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <span class="pull-right">
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-primary': 'btn-default' }}" ng-click="startEditing(task);">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-success': 'btn-default' }}"><i class="glyphicon glyphicon-ok"></i></button>
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-danger': 'btn-default' }}"><i class="glyphicon glyphicon-trash"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-tasks"></i>  Active</a>
+                    <span class="pull-right">
+                <a href="" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i>  Delete All</a>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
