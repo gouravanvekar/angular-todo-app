@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var api = require('spitfire-express')('testapp', app.get('env'));
+var api = require('spitfire-express')('testapp', 'development');
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
