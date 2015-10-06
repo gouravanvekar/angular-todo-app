@@ -41,25 +41,36 @@
 </nav>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+<div class="jumbotron container-fluid">
     <div class="container">
         <h1>Blocitoff</h1>
-        <hr>
     </div>
 </div>
-<div id="vote" class="container">
+<div id="todo" class="container">
+    <div class="row">
+        <hr>
+        <blockquote>
+            <p>
+                To-do lists are notorious for collecting junk - tasks that you want to remember but constantly reprioritize. To solve the problem of to-do list clutter, Blocitoff will manage your to-do lists by automatically deleting tasks that have not been completed after seven days.
+            </p>
+            <footer>
+                Our hypothesis is that if the task is not important enough to be completed within seven days, it does not belong on your to-do list.
+            </footer>
+        </blockquote>
+        <hr>
+    </div>
     <div ui-view></div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3" >
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Task Type
-                </h3>
-            </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Task Type
+                    </h3>
+                </div>
 
-            <div class="panel-body">
-                <div class="row">
-                    <div class="input-group panel-body-container">
+                <div class="panel-body">
+                    <div class="input-group">
                         <input type="text" class="form-control" aria-label="..." placeholder="Enter new task">
                         <div class="input-group-btn">
                             <div class="btn-group" dropdown>
@@ -76,28 +87,29 @@
                         </div><!-- /btn-group -->
                     </div>
                     <hr/>
-
-                    <div class="col-md-8 col-lg-8 task-separator">
-                        <input type="text" class="form-control" aria-label="..." value="Task 1">
+                    <div class="row task-separator">
+                        <div class="col-md-8 col-lg-8">
+                            <input type="text" class="form-control" aria-label="..." value="Task 1">
                             <span class="pull-right">
                             </span>
-                        <div class="input-group">
+                            <div class="input-group">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4 task-separator">
+                        <div class="col-md-4 col-lg-4">
                         <span class="pull-right">
                         <button class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
                         <button class="btn btn-sm btn-success"><i class="glyphicon glyphicon-ok"></i></button>
                         <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                         </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer">
-                <a href="" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-tasks"></i>  Active</a>
+                <div class="panel-footer">
+                    <a href="" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-tasks"></i>  Active</a>
                     <span class="pull-right">
                 <a href="" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i>  Delete All</a>
                     </span>
+                </div>
             </div>
         </div>
     </div>

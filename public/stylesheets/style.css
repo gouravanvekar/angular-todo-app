@@ -5,12 +5,3 @@
 .centered-text {
     text-align:center
 }
-
-.panel-body-container{
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.drop-index{
-    z-index: 10;
-}
