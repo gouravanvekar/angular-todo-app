@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('myTodo', ['ui.router','ui.bootstrap'])
+        .module('myTodo', ['ui.router','ui.bootstrap','ngResource'])
         .config(config)
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];

@@ -6,3 +6,22 @@
 .centered-text {
     text-align: center;
 }
+
+.active{
+    color: #0000FF;
+}
+
+.complete{
+    text-decoration: line-through;
+    color: #34A853;
+}
+
+.expired{
+    color: #FF0000;
+    opacity: 0.6;
+}
+
+.trash{
+    text-decoration: line-through;
+    color: #00FF00;
+}

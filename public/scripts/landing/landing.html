@@ -9,26 +9,37 @@
 
             <div class="panel-body">
                 <div class="input-group">
-                    <input type="text" class="form-control" aria-label="" placeholder="Enter new task" ng-model="newTask.taskName">
+                    <input type="text" class="form-control" aria-label="" placeholder="Enter new task" ng-model="newTask.taskName" my-enter="addTask(newTask)">
                     <div class="input-group-btn">
                         <div class="btn-group" dropdown>
                             <button id="btn-append-to-body" type="button" class="btn btn-default" dropdown-toggle>
-                                Priority <span class="caret"></span>
+                                {{ newTask.taskPriority | capitalize }} <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu drop-index" role="menu" aria-labelledby="btn-append-to-body" ng-model="newTask.taskPriority">
-                                <li role="menuitem"><a href="#">Low</a></li>
-                                <li role="menuitem"><a href="#">Medium</a></li>
-                                <li role="menuitem"><a href="#">High</a></li>
+                            <ul class="dropdown-menu drop-index"  aria-labelledby="btn-append-to-body">
+                                <li ng-repeat="priority in priorities">
+                                    <a ng-click="newTask.taskPriority = priority">{{ priority | capitalize }}</a>
+                                </li>
                             </ul>
                         </div>
                         <button class="btn btn-default btn-primary" ng-click="addTask(newTask)">Add</button>
                     </div>
                 </div>
                 <hr/>
-                <div class="row task-separator"  ng-repeat="task in tasks" ng-mouseenter="task.buttons= true;" ng-mouseleave="task.buttons= false;">
-                    <div class="col-md-8 col-lg-8" ng-dblclick="startEditing(task);">
+                <div class="row task-separator"
+                     ng-repeat="task in tasks"
+                     ng-mouseenter="task.buttons= true;"
+                     ng-mouseleave="task.buttons= false;">
+                    <div class="col-md-2 col-lg-2">
+                        <span class="label {{ task.taskPriority == 'high' ? 'label-danger' : (task.taskPriority
+                         == 'medium' ? 'label-warning' : 'label-primary')}}">
+                            {{ task.taskStatus == 'expired' ? 'expired' : task.taskPriority | capitalize}}
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-lg-6" ng-dblclick="startEditing(task);">
                         <span ng-hide="task.editing">
-                            <h5>{{task.taskName}}</h5>
+                            <h5 class="{{ task.taskStatus == 'completed' ? 'complete' : (task.taskStatus == 'expired' ? 'expired' : 'active')}}">
+                                {{task.taskName}}
+                            </h5>
                         </span>
                         <form ng-submit="doneEditing(task)" ng-show="task.editing">
                             <input type="text" class="form-control" ng-model="task.taskName" ng-blur="doneEditing(task)" ng-focus="task == editedTask">
@@ -36,19 +47,23 @@
                     </div>
                     <div class="col-md-4 col-lg-4">
                         <span class="pull-right">
-                            <button class="btn btn-sm {{ task.buttons ? 'btn-primary': 'btn-default' }}" ng-click="startEditing(task);">
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-primary': 'btn-default' }}" ng-click="startEditing(task);" ng-show="task.taskStatus == 'active'">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button class="btn btn-sm {{ task.buttons ? 'btn-success': 'btn-default' }}"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button class="btn btn-sm {{ task.buttons ? 'btn-danger': 'btn-default' }}"><i class="glyphicon glyphicon-trash"></i></button>
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-success': 'btn-default' }}" ng-click="markTaskComplete(task, 'completed')"  ng-show="task.taskStatus == 'active'">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </button>
+                            <button class="btn btn-sm {{ task.buttons ? 'btn-danger': 'btn-default' }}" ng-click="deleteTask(task)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
-                <a href="" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-tasks"></i>  Active</a>
+                <a type="button" class="btn btn-sm btn-success" ng-click="getTasksByStatus('active')"><i class="glyphicon glyphicon-tasks"></i>  Active</a>
                     <span class="pull-right">
-                <a href="" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i>  Delete All</a>
+                        <a href="" type="button" class="btn btn-sm btn-danger" ng-click="getTasksByStatus('expired')"><i class="glyphicon glyphicon-time"></i>  Expired</a>
                     </span>
             </div>
         </div>
