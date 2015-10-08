@@ -71,8 +71,13 @@
             task.taskExpirationDate = moment();
             var numberOfDaysToAdd = 7;
             task.taskExpirationDate.add(numberOfDaysToAdd, 'days');
-
-            tasks.push(task);
+            if(tasks.length > 0) {
+                tasks.push(task);
+            }
+            else{
+                tasks = [];
+                tasks.push(task);
+            }
         }
 
         function deleteTask(task){

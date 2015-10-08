@@ -28,11 +28,17 @@
             $scope.editedItem = null;
         }
 
-        $scope.addTask = function(newTask){
+        $scope.allTasks = function(){
+            $scope.tasks = TodoService.getAllTasks();
+        }
+
+        $scope.addTask = function(){
             //TodoService.save(newTask);
-            TodoService.addTask(newTask);
-            $scope.newTask = {};
-            $scope.newTask.taskPriority = $scope.priorities[0];
+            if($scope.newTask.taskName !== undefined){
+                TodoService.addTask($scope.newTask);
+                $scope.newTask = {};
+                $scope.newTask.taskPriority = $scope.priorities[0];
+            }
         }
 
         $scope.deleteTask = function(task){
