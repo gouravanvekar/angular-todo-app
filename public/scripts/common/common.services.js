@@ -5,8 +5,8 @@
         .module('myTodo')
         .factory('TodoService', TodoService);
 
-    TodoService.$inject = ['$resource'];
-    function TodoService($resource) {
+    TodoService.$inject = ['$resource', '$timeout'];
+    function TodoService($resource, $timeout) {
         //return $resource('/api/tasks/:id', { id:'@id'},
         //    {
         //        'update': { method:'PUT' }
@@ -19,7 +19,7 @@
                 "taskPriority": "medium",
                 "taskDate": "10/06/2015",
                 "taskStatus": "active",
-                "taskExpirationDate": "10/07/2015",
+                "taskExpirationDate": "1444404439000",
                 "editing" : false,
                 "buttons" : false
             },
@@ -29,7 +29,7 @@
                 "taskPriority": "high",
                 "taskDate": "05/26/2015",
                 "taskStatus": "completed",
-                "taskExpirationDate": "05/27/2015",
+                "taskExpirationDate": "1444404439000",
                 "editing" : false,
                 "buttons" : false
             },
@@ -39,7 +39,7 @@
                 "taskPriority": "low",
                 "taskDate": "9/05/2015",
                 "taskStatus": "expired",
-                "taskExpirationDate": "9/06/2015",
+                "taskExpirationDate": "1444404439000",
                 "editing" : false,
                 "buttons" : false
             }
@@ -51,6 +51,8 @@
         service.addTask = addTask;
         service.deleteTask = deleteTask;
         service.setTaskStatus = setTaskStatus;
+        service.timeoutDuration = 5000;
+        service.taskExpirationTimeout = $timeout(onTimeout, service.timeoutDuration);
 
         return service;
 
@@ -66,11 +68,10 @@
 
         function addTask(task){
             task.taskStatus = "active";
-            task.taskDate = Date.now();
+            var taskDates = getTaskDates();
+            task.taskDate = taskDates.startDate;
+            task.taskExpirationDate = taskDates.endDate;
 
-            task.taskExpirationDate = moment();
-            var numberOfDaysToAdd = 7;
-            task.taskExpirationDate.add(numberOfDaysToAdd, 'days');
             if(tasks.length > 0) {
                 tasks.push(task);
             }
@@ -93,7 +94,30 @@
             task.taskStatus = status;
         }
 
-        // private functions
+        //private functions
+        function getTaskDates(){
+            var currentDate = moment();
+            var taskDate = currentDate;
+            var timeToAdd = 1;
+            currentDate.add(timeToAdd, 'minutes');
+            var taskExpirationDate = currentDate;
+
+            return {
+                startDate: taskDate,
+                endDate: taskExpirationDate
+            }
+        }
+
+        function onTimeout(){
+            for(var i=0; i < tasks.length; i++){
+                var currentDate = moment();
+                if(currentDate > tasks[i].taskExpirationDate && tasks[i].taskStatus !== 'completed'){
+                    tasks[i].taskStatus = 'expired';
+                }
+            }
+            service.taskExpirationTimeout = $timeout(onTimeout, service.timeoutDuration);
+        }
+
         //$http.get('/api/tasks').then(handleSuccess, handleError('Error getting all tasks'));
 
         //function handleSuccess(res) {

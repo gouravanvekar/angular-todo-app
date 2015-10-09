@@ -18,10 +18,15 @@
 
 .expired{
     color: #FF0000;
+    text-decoration: line-through;
     opacity: 0.6;
 }
 
 .trash{
     text-decoration: line-through;
     color: #00FF00;
+}
+
+.logo{
+    width: 50%;
 }

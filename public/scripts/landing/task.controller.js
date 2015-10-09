@@ -9,6 +9,7 @@
     function TaskController($scope, TodoService) {
         //$scope.tasks = TodoService.query();
 
+        $scope.expiration = TodoService.taskExpirationTimeout;
         $scope.priorities = ['high','medium','low'];
         $scope.newTask = {};
         $scope.newTask.taskPriority = $scope.priorities[0];
