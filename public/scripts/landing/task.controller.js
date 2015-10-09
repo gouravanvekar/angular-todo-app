@@ -10,6 +10,7 @@
         //$scope.tasks = TodoService.query();
 
         $scope.expiration = TodoService.taskExpirationTimeout;
+        $scope.taskType = 'All';
         $scope.priorities = ['high','medium','low'];
         $scope.newTask = {};
         $scope.newTask.taskPriority = $scope.priorities[0];
@@ -49,6 +50,7 @@
         }
 
         $scope.getTasksByStatus = function(status){
+            $scope.taskType = status;
             $scope.tasks = TodoService.getTasksByStatus(status);
         }
 
