@@ -31,6 +31,7 @@
         }
 
         $scope.allTasks = function(){
+            $scope.taskType = 'All';
             $scope.tasks = TodoService.getAllTasks();
         }
 
@@ -40,6 +41,7 @@
                 TodoService.addTask($scope.newTask);
                 $scope.newTask = {};
                 $scope.newTask.taskPriority = $scope.priorities[0];
+                $scope.tasks = TodoService.getAllTasks();
             }
         }
 
@@ -52,12 +54,6 @@
         $scope.getTasksByStatus = function(status){
             $scope.taskType = status;
             $scope.tasks = TodoService.getTasksByStatus(status);
-        }
-
-        function getTasksByStatus(status) {
-            return $scope.tasks.filter(function (task){
-                return task.taskStatus === status;
-            });
         }
 
         $scope.markTaskComplete = function(task, status){
