@@ -7,9 +7,7 @@
 
     TaskController.$inject = ['$scope', 'TodoService'];
     function TaskController($scope, TodoService) {
-        //$scope.tasks = TodoService.query();
-
-        $scope.expiration = TodoService.taskExpirationTimeout;
+        $scope.expiration = TodoService.taskExpirationTimeout();
         $scope.taskType = 'All';
         $scope.priorities = ['high','medium','low'];
         $scope.newTask = {};
@@ -35,8 +33,7 @@
             $scope.tasks = TodoService.getAllTasks();
         }
 
-        $scope.addTask = function(){
-            //TodoService.save(newTask);
+        $scope.addTask = function() {
             if($scope.newTask.taskName !== undefined){
                 TodoService.addTask($scope.newTask);
                 $scope.newTask = {};
@@ -46,14 +43,17 @@
         }
 
         $scope.deleteTask = function(task){
-            //TodoService.delete(task);
-            //$scope.tasks = TodoService.query();
             TodoService.deleteTask(task);
+            $scope.tasks = TodoService.getAllTasks();
         }
 
         $scope.getTasksByStatus = function(status){
             $scope.taskType = status;
-            $scope.tasks = TodoService.getTasksByStatus(status);
+            TodoService.getAllTasks().$promise.then(function (result) {
+                $scope.tasks = result.filter(function (task){
+                    return task.taskStatus === status;
+                });
+            });
         }
 
         $scope.markTaskComplete = function(task, status){

@@ -17,11 +17,6 @@
                 var taskDates = getTaskDates();
                 task.taskDate = taskDates.startDate;
                 task.taskExpirationDate = taskDates.endDate;
-
-                //var resource = $resource('/api/tasks/:id', { id:'@id'},
-                //    {
-                //        'update': { method:'PUT' }
-                //    });
                 resource.save(task);
             },
             getTasksByStatus: function(status){
@@ -34,14 +29,12 @@
             },
             setTaskStatus: function(task, status) {
                 task.taskStatus = status;
-                //var foundTask = resource.get({id:task._id}, function() {
-                //    foundTask.taskStatus = status;
-                //    foundTask.$save();
-                //})
-                resource.update({id:task._id}, task);
+                var taskId = task._id;
+                delete task._id;
+                resource.update({id:taskId}, task);
             },
             taskExpirationTimeout: function(){
-                $timeout(onTimeout, 5000)
+                $timeout(onTimeout, 0)
             }
         }
 
@@ -60,16 +53,25 @@
         }
 
         function onTimeout(){
-            var resource = $resource('/api/tasks/:id', { id:'@id'}, {'update': { method:'PUT' }});
             var tasks = resource.query();
-            for(var i=0; i < tasks.length; i++){
-                var currentDate = moment();
-                if(currentDate > tasks[i].taskExpirationDate && tasks[i].taskStatus !== 'completed'){
-                    tasks[i].taskStatus = 'expired';
-                    resource.save(tasks[i]);
+
+            tasks.$promise.then(function (result) {
+                tasks = result;
+                for(var i=0; i < tasks.length; i++){
+                    var currentDate = moment();
+                    if(currentDate.format() > moment(tasks[i].taskExpirationDate).format() && tasks[i].taskStatus !== 'completed'){
+                        tasks[i].taskStatus = 'expired';
+                        var taskId = tasks[i]._id;
+                        delete tasks[i]._id;
+                        resource.update({id:taskId}, tasks[i]);
+                    }
                 }
-            }
-            //taskExpirationTimeout = $timeout(onTimeout, 5000);
+            });
+
+            var myLoop = function(){
+                $timeout(onTimeout, 5000);
+            };
+            myLoop();
         }
     }
 })();
