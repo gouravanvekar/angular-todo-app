@@ -19,9 +19,12 @@
                 task.taskExpirationDate = taskDates.endDate;
                 resource.save(task);
             },
-            getTasksByStatus: function(status){
-                return resource.query().filter(function (task){
-                    return task.taskStatus === status;
+            getTasksByStatus: function(status, callback){
+                resource.query().$promise.then(function (result) {
+                    var filteredTasks = result.filter(function (task){
+                        return task.taskStatus === status;
+                    });
+                    callback(filteredTasks);
                 });
             },
             deleteTask: function(task){

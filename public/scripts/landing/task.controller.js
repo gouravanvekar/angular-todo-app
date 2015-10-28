@@ -49,10 +49,8 @@
 
         $scope.getTasksByStatus = function(status){
             $scope.taskType = status;
-            TodoService.getAllTasks().$promise.then(function (result) {
-                $scope.tasks = result.filter(function (task){
-                    return task.taskStatus === status;
-                });
+            TodoService.getTasksByStatus(status, function(filteredTasks) {
+                $scope.tasks = filteredTasks;
             });
         }
 
