@@ -1,6 +1,11 @@
 <!DOCTYPE HTML>
 <html ng-app="myTodo">
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Angular Todo app">
+    <meta name="keywords" content="list, task list, todo, angular, blocitoff, bloc">
+    <meta name="author" content="Gourav Anvekar">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blocitoff &mdash; Angular TODO app</title>
@@ -8,6 +13,7 @@
     <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -23,9 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"  ui-sref="home">
-                <img class="logo" src="assets/images/bloc_jams_logo.png">
-            </a>
+            <a class="navbar-brand" ui-sref="home">Home</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" collapse="navCollapsed">
@@ -41,27 +45,45 @@
         <!-- /.navbar-collapse -->
     </div>
 </nav>
-
+<br />
+<br />
+<br />
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron container-fluid">
+<div class="container-fluid">
     <div class="container">
         <h1>Blocitoff</h1>
     </div>
 </div>
+<br />
 <div id="todo" class="container">
-    <div ui-view></div>
     <div class="row">
-        <hr>
-        <blockquote>
+        <blockquote class="block-quote">
             <p>
-                To-do lists are notorious for collecting junk - tasks that you want to remember but constantly reprioritize. To solve the problem of to-do list clutter, Blocitoff will manage your to-do lists by automatically deleting tasks that have not been completed after seven days.
+                Todo lists are notorious for collecting junk tasks that you want to remember but constantly re-prioritize.
+                To solve the problem of todo list clutter, <span class="label label-primary">Blocitoff</span> will manage your to-do lists by automatically deleting tasks that have not been completed after seven days.
             </p>
             <footer>
-                Our hypothesis is that if the task is not important enough to be completed within seven days, it does not belong on your to-do list.
+                <strong>Our hypothesis is that if the task is not important enough to be completed within seven days, it does not belong on your to-do list.</strong>
+                <br /><br /> For demo purposes, the task will expire in <span class="label label-info">1 minute</span> if it is not marked as complete
             </footer>
         </blockquote>
-        <hr>
     </div>
+
+    <div ui-view></div>
+
+
+    <hr>
+    <footer>
+        <span class="pull-left">
+            <strong>
+                &copy; <a href="http://www.gouravanvekar.com/" target="_blank">Gourav Anvekar</a>
+                &nbsp;&nbsp;| &nbsp; <a class="footer-link" href="https://github.com/gouravanvekar/angular-todo-app" target="_blank">View on GitHub</a>
+            </strong>
+        </span>
+        <span class="pull-right">
+            <a class="github-button" href="https://github.com/gouravanvekar" data-style="mega" aria-label="Follow @gouravanvekar on GitHub">Follow @gouravanvekar</a>
+        </span>
+    </footer>
 </div>
 
 <script type="text/javascript" src="scripts/angular.min.js"></script>
@@ -70,6 +92,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-resource.js"></script>
 <script type="text/javascript" src="scripts/moment.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
 <!--Application Script-->
 <script type="text/javascript" src="scripts/app.js"></script>

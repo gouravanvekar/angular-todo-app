@@ -1,3 +1,7 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
 .task-separator{
     margin-bottom: 10px;
     cursor: pointer;
@@ -29,4 +33,16 @@
 
 .logo{
     width: 50%;
+}
+
+.git-button{
+    margin-top: 5px;
+}
+
+.btn-group.dropdown{
+    cursor: pointer;
+}
+
+.block-quote{
+    line-height: 1.8em;
 }

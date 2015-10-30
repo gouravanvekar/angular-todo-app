@@ -1,6 +1,6 @@
 #Blocitoff Angular Todo app
 
-##Standard Express generated application + the spitfire-express middlware.
+##Standard Express generated application + the spitfire-express middleware.
 
 ###Requirements
 - Node.js
@@ -8,8 +8,9 @@
 ###Installation
 ```bash
 $ git clone https://github.com/gouravanvekar/angular-todo-app.git
-$ cd spitfire-server
+$ cd angular-todo-app
 $ npm install
+$ npm start
 ```
 
 ####NOTE: Will NOT generate endpoints on the fly when the environment is set to 'production'

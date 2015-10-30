@@ -45,8 +45,8 @@
         function getTaskDates(){
             var currentDate = moment();
             var taskDate = currentDate;
-            var timeToAdd = 0.3;
-            currentDate.add(timeToAdd, 'minutes');
+            var timeToAdd = 1;                      //Adds 1 minute as expiration time. Change the value here as per your requirement
+            currentDate.add(timeToAdd, 'minutes');  //Change minutes to days/months/years etc.
             var taskExpirationDate = currentDate;
 
             return {
